@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hermgen/create_account_page.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -7,13 +8,17 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsetsGeometry.symmetric(horizontal: 10, vertical: 60),
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 16, vertical: 60),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Image.asset('assets/logo.png', height: 100, width: 100),
-            Text('HermGen', style: Theme.of(context).textTheme.titleLarge),
+            Text(
+              'HermGen',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24),
               child: Text(
@@ -25,9 +30,13 @@ class StartPage extends StatelessWidget {
             ),
             SizedBox(height: 90),
             FilledButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => CreateAccountPage()),
+                );
+              },
 
-              style: ElevatedButton.styleFrom(
+              style: FilledButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
