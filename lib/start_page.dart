@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -14,34 +13,27 @@ class StartPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/logo.png', height: 100, width: 100),
-            Text(
-              'HermGen',
-              style: GoogleFonts.raleway(
-                fontSize: 52,
-                fontWeight: FontWeight.bold,
+            Text('HermGen', style: Theme.of(context).textTheme.titleLarge),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: Text(
+                'Beautiful eCommerce App for you online store',
+                style: Theme.of(context).textTheme.bodyLarge,
+                softWrap: true,
+                textAlign: TextAlign.center,
               ),
-            ),
-            Text(
-              'Beautiful eCommerce App for you online store',
-              style: GoogleFonts.nunitoSans(
-                fontSize: 19,
-                fontWeight: FontWeight.w300,
-              ),
-              softWrap: true,
-              textAlign: TextAlign.center,
             ),
             SizedBox(height: 90),
             FilledButton(
               onPressed: () {},
+
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                textStyle: GoogleFonts.nunitoSans(
-                  fontSize: 19,
-                  fontWeight: FontWeight.w300,
-                ),
+                textStyle: Theme.of(context).textTheme.labelLarge,
               ),
               child: Text("Let's get started"),
             ),
@@ -50,7 +42,7 @@ class StartPage extends StatelessWidget {
               children: [
                 Text(
                   'I already have an account',
-                  style: GoogleFonts.nunitoSans(fontSize: 16),
+                  style: Theme.of(context).textTheme.labelMedium,
                 ),
                 IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward)),
               ],
