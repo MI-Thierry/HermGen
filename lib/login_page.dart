@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
 
-class CreateAccountPage extends StatefulWidget {
-  const CreateAccountPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
   State<StatefulWidget> createState() {
-    return _CreateAccountPageState();
+    return _LoginPageState();
   }
 }
 
-class _CreateAccountPageState extends State<CreateAccountPage> {
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _border = OutlineInputBorder(borderRadius: BorderRadius.circular(8));
   final _validEmailRegex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
   final _strongPasswordRegex =
       r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@\(\)!\%*?&]).{8,}$";
-  final _validPhoneRegex =
-      r"^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$";
-  final _formKey = GlobalKey<FormState>();
-  final InputBorder _border = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(8),
-  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: <Widget>[
-          Image.asset('assets/create_account_page_background.png'),
+        children: [
+          Image.asset('assets/login_page_background.png'),
           Padding(
             padding: EdgeInsetsGeometry.symmetric(horizontal: 16, vertical: 60),
             child: Column(
@@ -33,13 +29,11 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
+                Text('Login', style: Theme.of(context).textTheme.titleLarge),
                 Text(
-                  'Create Account',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.copyWith(fontSize: 50),
+                  'Good to see back!',
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                Image.asset('assets/logo.png', height: 100, width: 100),
                 SizedBox(height: 50),
                 Form(
                   key: _formKey,
@@ -83,20 +77,16 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                           border: _border,
                         ),
                       ),
-                      TextFormField(
-                        validator: (phone) {
-                          if (phone == null || phone.isEmpty) {
-                            return 'Please enter you phone number.';
-                          } else if (RegExp(_validPhoneRegex).hasMatch(phone)) {
-                            return 'Please enter a valid phone number';
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.phone,
-                        decoration: InputDecoration(
-                          label: const Text('Phone Number'),
-                          border: _border,
+                      TextButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.circular(0),
+                          ),
+                          textStyle: Theme.of(context).textTheme.labelMedium,
+                          padding: EdgeInsets.all(0),
                         ),
+                        child: const Text('Forget password.'),
                       ),
                       SizedBox(height: 40),
                       FilledButton(
@@ -123,7 +113,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                             vertical: 12,
                           ),
                         ),
-                        child: const Text('Done'),
+                        child: const Text('Login'),
                       ),
                       TextButton(
                         onPressed: () {

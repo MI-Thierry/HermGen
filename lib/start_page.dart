@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hermgen/create_account_page.dart';
+import 'package:hermgen/login_page.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
@@ -53,7 +54,14 @@ class StartPage extends StatelessWidget {
                   'I already have an account',
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
-                IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward)),
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
+                  },
+                  icon: Icon(Icons.arrow_forward),
+                ),
               ],
             ),
           ],
