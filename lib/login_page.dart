@@ -18,27 +18,33 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Image.asset('assets/login_page_background.png'),
-          Padding(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: 16, vertical: 60),
+    return Container(
+      decoration: BoxDecoration(color: Colors.white),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/login_page_background.png'),
+            fit: BoxFit.fill,
+          ),
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Padding(
+            padding: EdgeInsetsGeometry.symmetric(horizontal: 16, vertical: 20),
             child: Column(
-              spacing: 8,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text('Login', style: Theme.of(context).textTheme.titleLarge),
                 Text(
                   'Good to see back!',
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 20),
                 Form(
                   key: _formKey,
                   child: Column(
-                    spacing: 8,
+                    spacing: 4,
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
@@ -88,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         child: const Text('Forget password.'),
                       ),
-                      SizedBox(height: 40),
+                      SizedBox(height: 20),
                       FilledButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
@@ -137,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
