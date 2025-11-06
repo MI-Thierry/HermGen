@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hermgen/features/auth/welcome_cards_page.dart';
 
 class CreateAccountPage extends StatefulWidget {
   const CreateAccountPage({super.key});
@@ -113,9 +114,9 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                         FilledButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Processing the data.'),
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => WelcomeCardsPage(),
                                 ),
                               );
                             }

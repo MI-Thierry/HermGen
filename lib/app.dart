@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hermgen/start_page.dart';
+import 'package:hermgen/features/auth/start_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hermgen/create_account_page.dart';
-import 'package:hermgen/login_page.dart';
+import 'package:hermgen/features/auth/create_account_page.dart';
+import 'package:hermgen/features/auth/login_page.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
