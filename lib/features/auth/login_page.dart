@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hermgen/features/auth/auth_state_provider.dart';
 import 'package:hermgen/features/auth/welcome_cards_page.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,6 +13,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _border = OutlineInputBorder(borderRadius: BorderRadius.circular(8));
   final _validEmailRegex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
@@ -19,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    var authStateProvider = Provider.of<AuthStateProvider>(context);
     return Container(
       decoration: BoxDecoration(color: Colors.white),
       child: Container(
@@ -50,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       TextFormField(
+                        controller: _emailController,
                         validator: (email) {
                           if (email == null || email.isEmpty) {
                             return 'Please enter you email';
@@ -67,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       TextFormField(
+                        controller: _passwordController,
                         validator: (password) {
                           if (password == null || password.isEmpty) {
                             return 'Please enter you password';
@@ -99,10 +106,10 @@ class _LoginPageState extends State<LoginPage> {
                       FilledButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => WelcomeCardsPage(),
-                              ),
+                            authStateProvider.updateAuthenticationState(
+                              surname: 'Muhirwa',
+                              givenName: 'Thierry',
+                              phoneNumber: '0798642230',
                             );
                           }
                         },

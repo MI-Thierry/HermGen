@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ReadyCard extends StatelessWidget {
   const ReadyCard({super.key});
@@ -36,7 +37,9 @@ class ReadyCard extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.go('/');
+                  },
                   style: FilledButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadiusGeometry.circular(16),

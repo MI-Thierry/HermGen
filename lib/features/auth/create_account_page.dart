@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hermgen/features/auth/auth_state_provider.dart';
 import 'package:hermgen/features/auth/welcome_cards_page.dart';
+import 'package:provider/provider.dart';
 
 class CreateAccountPage extends StatefulWidget {
   const CreateAccountPage({super.key});
@@ -11,6 +14,12 @@ class CreateAccountPage extends StatefulWidget {
 }
 
 class _CreateAccountPageState extends State<CreateAccountPage> {
+  final _emailController = TextEditingController();
+  final _givenNameController = TextEditingController();
+  final _surnameController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   final _validEmailRegex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
   final _strongPasswordRegex =
       r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@\(\)!\%*?&]).{8,}$";
@@ -23,6 +32,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
   @override
   Widget build(BuildContext context) {
+    var authStateProvider = Provider.of<AuthStateProvider>(context);
     return Container(
       decoration: BoxDecoration(color: Colors.white),
       child: Container(
@@ -59,6 +69,37 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         TextFormField(
+                          controller: _surnameController,
+                          validator: (name) {
+                            if (name == null || name.isEmpty) {
+                              return 'Please enter your first name';
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            label: const Text('First Name'),
+                            border: _border,
+                          ),
+                        ),
+
+                        TextFormField(
+                          controller: _givenNameController,
+                          validator: (name) {
+                            if (name == null || name.isEmpty) {
+                              return 'Please enter your last name';
+                            }
+                            return null;
+                          },
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            label: const Text('Last Name'),
+                            border: _border,
+                          ),
+                        ),
+
+                        TextFormField(
+                          controller: _emailController,
                           validator: (email) {
                             if (email == null || email.isEmpty) {
                               return 'Please enter you email';
@@ -76,6 +117,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                           ),
                         ),
                         TextFormField(
+                          controller: _passwordController,
                           validator: (password) {
                             if (password == null || password.isEmpty) {
                               return 'Please enter you password';
@@ -94,6 +136,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                           ),
                         ),
                         TextFormField(
+                          controller: _phoneNumberController,
                           validator: (phone) {
                             if (phone == null || phone.isEmpty) {
                               return 'Please enter you phone number.';
@@ -112,13 +155,16 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                         ),
                         SizedBox(height: 40),
                         FilledButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => WelcomeCardsPage(),
-                                ),
+                              await authStateProvider.updateAuthenticationState(
+                                surname: _surnameController.text,
+                                givenName: _givenNameController.text,
+                                phoneNumber: _phoneNumberController.text,
                               );
+                              if (context.mounted) {
+                                context.go('/welcome');
+                              }
                             }
                           },
 
